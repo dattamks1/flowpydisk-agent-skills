@@ -1,0 +1,8 @@
+{
+  "name": "flowpydisk",
+  "description": "The FlowpyDisk agent skill and per-surface guides, plus the hosted FlowpyDisk MCP server.",
+  "version": "1.0.0",
+  "homepage": "https://flowpydisk.com",
+  "repository": "https://github.com/dattamks1/flowpydisk-agent-skills",
+  "license": "Apache-2.0"
+}

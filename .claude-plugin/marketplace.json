@@ -1,0 +1,13 @@
+{
+  "name": "flowpydisk",
+  "owner": {
+    "name": "FlowpyDisk"
+  },
+  "plugins": [
+    {
+      "name": "flowpydisk",
+      "source": "./",
+      "description": "The FlowpyDisk agent skill and per-surface guides, plus the hosted FlowpyDisk MCP server."
+    }
+  ]
+}
