@@ -39,6 +39,13 @@ notifications included. `get_workspace("personal")` reads its name. Members
 and invites have nothing to read in the personal space, so those two refuse
 `"personal"`.
 
+With an API key, each `list_workspaces` row also
+carries `pinned` (the person pinned it in their switcher) and `has_unread` (an
+unread notification about it, or a chat there that waits for them. Mail is not
+counted). Pinning is the person's own choice in the apps and has no tool. A key
+lists one workspace at most, so the API's `search` and paging are not tool
+arguments.
+
 `get_workspace`, `list_workspace_members`, `invite_workspace_member` and the
 rest answer **404** for any workspace that is not the key's own - by design.
 

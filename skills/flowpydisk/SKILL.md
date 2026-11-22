@@ -41,7 +41,10 @@ Do these in order at the start of every session.
    a connected app, the person's `role` there (null in the personal space) and
    `read_only_reason`: `connection` (the person granted this app read only
    there), `role` (their role there can only read) or null (it can write).
-   Tell the person the right one when a write is refused.
+   Tell the person the right one when a write is refused. With an API key each
+   workspace also carries `member_count`, `pinned` (pinned in the person's
+   switcher) and `has_unread` (an unread notification about it or a chat there
+   waiting for them. Mail is not counted). Pinning is done in the apps, not here.
 3. Ask the person which space to work in when there is more than one. Do not
    assume the default.
 4. `get_space_capabilities` in that space. It says the plan, whether AI is on,
