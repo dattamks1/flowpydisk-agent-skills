@@ -207,6 +207,10 @@ purpose.
   first. Not what changed: that is `list_files` with
   `ordering="-updated_at"`. An agent's own reads are never recorded as opens.
   `kind="note"` gives only the notes they opened, `kind="file"` the rest.
+  A video or audio row also says how far the person played it
+  (`position_seconds`, `duration_seconds`, `watched_at`): "pick up where I left off" is answerable from it. `position_seconds`
+  is null when never played and 0 after finishing. Only their players save a
+  position. Nothing done through this connection moves it.
 * `set_file_starred(file_id, starred)` stars or unstars a file for the
   person, and `starred=True` on `list_files` or
   `list_media` lists what they starred. A star is the person's own mark
