@@ -429,7 +429,9 @@ search {"query": "supplier contracts", "semantic": true, "limit": 10}
   total: page with `offset` until a page is shorter than `limit`. Each hit has
   `matched_in` (`name` or `text`) and a `snippet`. A hit on a meeting
   transcript also carries `at_seconds`: the start of the matched turn, in
-  seconds since the meeting started. Other hits have `at_seconds` null.
+  seconds since the meeting started. Other hits have `at_seconds` null. A
+  file hit carries `source_file`, as `get_file` does: a note made from a
+  .docx names that document's id (for `save_note_back_to_docx`), else null.
 - `semantic_search`: `query`, `mode` (`auto` default, `keyword`, `semantic`).
   `meaning` is a deprecated alias of `semantic`.
   Returns up to 10 excerpts with `chunk_text`, `score`, `final_score`,
@@ -1313,7 +1315,8 @@ create_event {"title": "Design review", "start_at": "2026-11-17T15:00:00+05:30",
   own drive. Only when asked: it writes a new note every time.
 - `get_daily_brief`: today's tasks, meetings, important unread mail and new
   form responses. Answer in a line or two.
-- `get_usage` shows `call_minutes` used against the monthly pool.
+- `get_usage` shows `call_minutes` used against the monthly pool, and
+  `transcription_minutes` (meetings, voice input and live voice) against its own.
 
 ### 12.3 Tasks
 
@@ -1726,7 +1729,8 @@ person does these in the FlowpyDisk web app.
   `delete_workspace`, `transfer_workspace_ownership`,
   `invite_workspace_member`, `resend_workspace_invite`,
   `revoke_workspace_invite`, `update_member_role`, `remove_workspace_member`,
-  `leave_workspace`, `get_invite`, `accept_invite`, `decline_invite`.
+  `leave_workspace`, `get_invite`, `accept_invite`, `join_workspace_with_code`,
+  `decline_invite`.
 - Operations: `reindex`, `rebuild_graph`, `rebuild_semantic_index`,
   `test_webhook`, `redeliver_webhook_delivery`, `resume_webhook`.
 - The person's own Collab views and public channels: `get_collab_unread`,

@@ -49,9 +49,10 @@ arguments.
 `get_workspace`, `list_workspace_members`, `invite_workspace_member` and the
 rest answer **404** for any workspace that is not the key's own - by design.
 
-**The three invite tools are the exception**, and it is a deliberate one:
-`get_invite`, `accept_invite` and `decline_invite` act on a **bare token**, not
-a `workspace_id`, so they never check membership. Any key works - and so does a
+**The invite tools are the exception**, and it is a deliberate one:
+`get_invite`, `accept_invite` and `decline_invite` act on a **bare token**, and
+`join_workspace_with_code` on an invite's short code, not a `workspace_id`, so
+they never check membership. Any key works - and so does a
 brand-new member's, before they have a membership row at all. That is the
 whole point: you cannot require membership to accept an invitation to join.
 
@@ -304,6 +305,13 @@ On the receiving side:
   what they are being asked to join.
 * **`token` is not the workspace id**, and it is **single-use**.
 * `accept_invite` returns the new `workspace_id`, `workspace_name`, `role` and the workspace's `features` (`{my_drive}`).
+* `join_workspace_with_code(code)` is `accept_invite`
+  by the invite's short code, `ABCD-EFGH`, which an Admin reads out from the
+  app. Same rules and the same answer: only the invited address, once, while it
+  is pending. A code for someone else's invite is `code_unknown`, exactly like
+  one that does not exist. `code_used`, `code_expired` and `code_revoked` say
+  why a known one stopped. Tries are rate limited, so never guess codes. No
+  tool shows or makes a code: handing over a way in is done in the app.
 * **`decline_invite` is final** - the sender has to invite again. It is not a
   "not now". Do not decline on somebody's behalf without being asked in those
   words.

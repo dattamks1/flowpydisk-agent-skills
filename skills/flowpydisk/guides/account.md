@@ -104,7 +104,14 @@ or anything someone else will read.
 It returns the space the call acts in: `used_bytes`, `quota_bytes`,
 `available_bytes`, `over_cap`, `overflow_allowed`, `backend` (`local` or `r2`),
 `disk_free_bytes` (null on `r2`), `ai_units_used`, `ai_can_spend`,
-`call_minutes` and `plan` (`name`, `slug`, `storage_bytes`, `weekly_ai_units`).
+`call_minutes`, `transcription_minutes` and `plan` (`name`, `slug`,
+`storage_bytes`, `weekly_ai_units`).
+
+**`transcription_minutes` is the paying account's monthly pool for meeting
+transcripts, voice input and live voice**:
+`used`, `limit` (null is unlimited), `resets_at` and `by_source` (`meeting`,
+`voice`, `live`). Each source is rounded up on its own, so the three can add
+up to a minute or two more than `used`: quote `used` for the total.
 
 **`ai_can_spend` answers "can AI be used here now?", yes or no**. It is true when the plan that pays for the space includes
 AI, AI is on in the workspace and under its weekly limit, and the paying
