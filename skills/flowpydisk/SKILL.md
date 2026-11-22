@@ -1352,8 +1352,8 @@ Booking states: `pending` (a request, holds nothing), `confirmed` (a meeting),
 
 - Read: `list_booking_pages`, `get_booking_page`,
   `list_availability_windows`, `get_booking_slots`, `list_bookings`.
-- Page: `create_booking_page`, `update_booking_page`, `delete_booking_page`
-  (approval), `restore_booking_page`.
+- Page: `create_booking_page`, `update_booking_page`, `duplicate_booking_page`,
+  `delete_booking_page` (approval), `restore_booking_page`.
 - Hours: `create_availability_window`, `update_availability_window`,
   `delete_availability_window` (approval).
 - Bookings: `approve_booking`, `decline_booking` (approval), `cancel_booking`
@@ -1376,6 +1376,8 @@ Booking states: `pending` (a request, holds nothing), `confirmed` (a meeting),
   says which.
 - Invitee names and emails are personal data of people outside the product.
 - A booking page applied from a template over a connection is built closed.
+- `duplicate_booking_page` copies settings, hours, hosts and look, never the
+  bookings. The copy is paused at a new slug. Turn it on only when asked.
 
 Example:
 
@@ -1543,15 +1545,21 @@ Mail). Attachment contents are not read. A hidden mailbox is refused with
 
 - Read: `list_collab_conversations`, `get_collab_messages` (newest first,
   page with `before`), `get_collab_thread`, `list_collab_members`,
-  `search_collab_messages`, `find_person` (exact username only, never email).
+  `search_collab_messages`, `find_person` (exact username only, never email),
+  `list_stickers` (the animated sticker catalogue, `query` to filter).
 - Write: `send_collab_message`, `forward_collab_message`,
   `edit_collab_message` and `delete_collab_message` (only your own app's
   messages, `app.mine: true`), `message_your_person` (the app's own DM with the
-  person).
+  person), `send_sticker` (a sticker by its `code`, alone with no words.
+  `stickers_off` where the conversation's `stickers_allowed` is false).
 - Messages show as "<app> for <person>". Never in a public channel. Only post
   what the person asked you to say.
 - Rate limits: `apps_wait_for_a_person` after 10 app messages in a row with no
   person writing, `app_rate_limited` after 60 in an hour. Wait, do not retry.
+- FlowpyDisk Support: `get_support_chat` reads the person's own chat with the
+  FlowpyDisk team (team replies show as "<first name> from FlowpyDisk").
+  `send_support_message` writes there for them, only when they asked you to
+  contact support. The team sees that chat only, never their files.
 
 ### 15.2 Comments
 

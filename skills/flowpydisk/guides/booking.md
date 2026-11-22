@@ -55,6 +55,7 @@ using the wrong tool tells them something untrue about their own week.
 | List pages | `list_booking_pages(trashed?)` | |
 | One page | `get_booking_page(page_id)` | Everything below is set here |
 | Create / edit | `create_booking_page(...)`, `update_booking_page(...)` | See §5 for the settings that matter |
+| Copy a page | `duplicate_booking_page(page_id, title?)` | Settings, hours, hosts and look. **Never the bookings**. A new slug, "Copy of ..." as the title, and always **paused**: turning it on is `update_booking_page(is_active=True)`, and only when the person asks, since it puts a second live link out |
 | Hours | `list_availability_windows`, `create_availability_window`, `update_availability_window`, `delete_availability_window` | `weekday` is 0=Monday, and the times are in the PAGE's zone, not yours. **Use `update_` to change a block** - it was delete-and-add until BR24a, and the end is now checked against the start already stored, so "move the end to 08:00" is refused rather than saving a block that ends before it begins |
 | What is free | `get_booking_slots(page_id, start, end)` | The same computation an invitee sees |
 | Who booked | `list_bookings(page_id, status?, start?, end?)` | Newest first, capped at 500 |
